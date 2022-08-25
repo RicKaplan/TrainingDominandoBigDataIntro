@@ -1,16 +1,16 @@
 ﻿// *****
 // Elementos constituintes basicos da ECL
 // Uma definicao
-//Mydef := 'Olá mundo';  // definicao do tipo "value"
+Mydef := 'Olá mundo';  // definicao do tipo "value"
 
 // Uma acao
-OUTPUT('Olá mundo');
-//OUTPUT(mydef);
+// OUTPUT('Olá mundo');
+OUTPUT(mydef);
 
 // *****
 // Estruturas de dados basicas em ECL
 // Estrutura RECORD
-/*
+
 rec := RECORD
   STRING10  Firstname;
 	STRING    Lastname;
@@ -28,7 +28,7 @@ ds := DATASET([{'Alysson','Oliveira','M',26,100,1000.50},
 							 {'Odair','Ferreira','M',66,350,6000},
 							 {'Orlando','Silva','U',67,300,4000}],rec);
 OUTPUT(ds);
-*/
+
 // *****
 // Filtragem e tabulaçao de datasets
 // recset := ds(Age<65);
@@ -41,10 +41,10 @@ OUTPUT(ds);
 // recset := ds(IsSeniorMale);
 // recset;
 
-// SetGender := ['M','F'];  //definicao do tipo "set"
-// recset := ds(Gender IN SetGender);
-// recset;						// definição do tipo "recordset"
-// COUNT(recset);    //Equivale a: OUTPUT(COUNT(recset));
+SetGender := ['M','F'];  //definicao do tipo "set"
+recset := ds(Gender IN SetGender);
+recset;						// definição do tipo "recordset"
+COUNT(recset);    //Equivale a: OUTPUT(COUNT(recset));
 
 // rec2 := RECORD
   // ds.Gender;
