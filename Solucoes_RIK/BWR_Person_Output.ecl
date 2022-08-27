@@ -1,3 +1,3 @@
 IMPORT $;
 
-OUTPUT($.File_Persons);
+OUTPUT($.File_Persons.file);
