@@ -46,6 +46,6 @@ EXPORT File_Crimes_Chicago := MODULE
     string29 Location;
  END;
  //YOUR initials between CLASS and Intro
- EXPORT File := DATASET('~class::rik::intro::rk_crimes::rk_crimes_-_2001_to_present.csv',Layout,CSV(heading(1)));
+ EXPORT File := DATASET('~class::rik::intro::rk_crimes_-_2001_to_present.csv',Layout,CSV(heading(1)));
 END;
 
