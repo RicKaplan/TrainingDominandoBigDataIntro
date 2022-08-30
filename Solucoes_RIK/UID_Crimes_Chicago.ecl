@@ -15,8 +15,17 @@ END;
 crimes_trans CrimesTransf($.File_Crimes_Chicago.Layout L1, UNSIGNED cnt) := TRANSFORM
 
 //Define condicoes logicas para tratamento da hora AM/PM
-  BOOLEAN HR_Less_12   := L1.Date[12..13] < '12';  //Boolean 12h
-  BOOLEAN Eh_PM   := L1.Date[21..22] = 'PM';  //Boolean PM ligado
+// Exemplo extraido do arquivo para analise do dado
+//ID        CaseNumber Date                   Block
+//10224738	HY411648	 09/05/2015 01:30:00 PM	043XX S WOOD ST
+//
+//   Posicoes da Data
+//   09/05/2015 01:30:00 PM
+//            1111111111222
+//   1234567890123456789012
+
+  BOOLEAN Eh_PM      := L1.Date[21..22] = 'PM';  //Boolean PM ligado
+  BOOLEAN HR_Less_12 := L1.Date[12..13] < '12';  //Boolean menor que 12h
 
 // transformacao propriamente dita
   SELF.rowid     := cnt;  /* adiciona o ID da linha */
@@ -28,7 +37,7 @@ crimes_trans CrimesTransf($.File_Crimes_Chicago.Layout L1, UNSIGNED cnt) := TRAN
   SELF.time      := IF(Eh_PM AND HR_Less_12,
               (string2)((unsigned2)(L1.Date[12..13]) + 12) /*hora + 12*/ + L1.Date[15..16] /* minuto */ + L1.Date[18..19] /* segundo */,                    
               L1.Date[12..13] /*hora*/ + L1.Date[15..16] /* minuto */ + L1.Date[18..19] /* segundo */);
-              
+
 // Propaga o restante do registro
   SELF           := L1;
 END;
