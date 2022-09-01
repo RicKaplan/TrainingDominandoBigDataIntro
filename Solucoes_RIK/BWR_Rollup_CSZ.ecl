@@ -1,29 +1,30 @@
-IMPORT $;
+import $;
 
-Layout_T_recs := RECORD
-	UNSIGNED4 CSZ_ID := $.STD_Persons.File.RecID;
-	$.STD_Persons.File.City;
-	$.STD_Persons.File.State;
-	$.STD_Persons.File.Zipcode;
+MyRec := RECORD
+$.UID_Person.city;
+$.UID_Person.state;
+$.UID_Person.ZipCode;
 END;
 
-T_recs := TABLE($.STD_Persons.File,Layout_T_recs);
-T_recs;
-S_recs := SORT(T_recs,ZipCode,State,City);
+//output($.UID_Person, named ('Person_Transform'));
 
-Layout_T_recs RollCSV(Layout_T_recs L, Layout_T_recs R) := TRANSFORM
-	SELF.CSZ_ID := IF(L.CSZ_ID < R.CSZ_ID,L.CSZ_ID,R.CSZ_ID);
-	SELF := L;
+city_table := TABLE($.UID_Person,MyRec); //create dataset com dados da cidade
+
+//output(city_table, named ('Table_City'));
+
+SortedTable := SORT(city_table,city, state, zipcode); //sort it first
+
+output(SortedTable, named ('SortedTable'));
+
+// Define estrutura do transform para Crimes de Chicago
+city_trans := RECORD
+    UNSIGNED   csz_id;  
+    MyRec;
 END;
-
-Rollup_CSZ := ROLLUP(S_Recs,
-										LEFT.Zipcode=RIGHT.Zipcode AND
-										LEFT.State=RIGHT.State AND
-										LEFT.City=RIGHT.City,
-										RollCSV(LEFT,RIGHT));
-
-Rollup_CSZ2 := SORT (Rollup_CSZ,CSZ_ID);
-			
-OUTPUT(Rollup_CSZ2,,'~CLASS::HMW::OUT::LookupCSZ',OVERWRITE);
-// count(Rollup_CSZ2);
-// OUTPUT(Rollup_CSZ,,'~CLASS::HMW::OUT::LookupCSZ',OVERWRITE);
+//
+city_trans Mytransf(myrec Le, myrec Ri, UNSIGNED cnt) := TRANSFORM
+SELF.csz_id := cnt;
+SELF := Le;
+END;
+//
+rolledrecs := ROLLUP (SortedTable,LEFT.MyRec = RIGHT.MyRec,Mytransf (LEFT,RIGHT,COUNTER));
