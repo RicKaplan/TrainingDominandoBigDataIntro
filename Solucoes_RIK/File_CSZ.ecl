@@ -7,5 +7,5 @@ EXPORT File_CSZ := MODULE
 	END;
 	SHARED Filename := '~class::rik::out::lookupcsz__p3304988207';
 	EXPORT File := DATASET(Filename,Layout,FLAT);
-//	EXPORT IDX_CSZ := INDEX(File,{CSZ_ID},{File},'~CLASS::HMW::KEY::Lookup_CSZ');
+//	EXPORT IDX_CSZ := INDEX(File,{CSZ_ID},{File},'~CLASS::Rik::KEY::Lookup_CSZ');
 END;
