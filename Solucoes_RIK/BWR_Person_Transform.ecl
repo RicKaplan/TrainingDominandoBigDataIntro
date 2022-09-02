@@ -37,6 +37,6 @@ END;
 
 // faz a transformação propriamente dita
 
-EXPORT newds := PROJECT(Persons,MyTransf(LEFT,COUNTER)) : PERSIST ('~CLASS::Rik::PERSIST::UID_Persons');
+newds := PROJECT(Persons,MyTransf(LEFT,COUNTER)) : PERSIST ('~CLASS::Rik::PERSIST::UID_Persons');
 
 output(newds, named ('Person_Transform'));

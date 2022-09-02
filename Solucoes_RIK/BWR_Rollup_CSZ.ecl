@@ -30,7 +30,6 @@ city_trans CityTransf(City_Record Le, UNSIGNED cnt) := TRANSFORM
 SELF.csz_id := cnt;
 SELF := Le;
 END;
-//
 
 // faz a transformação propriamente dita, via Project, em arquivo de persistencia e exporta UID
 
