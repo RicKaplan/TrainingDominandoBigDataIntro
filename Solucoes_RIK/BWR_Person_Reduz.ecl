@@ -26,4 +26,6 @@ joinedrecs := JOIN($.UID_Person, $.File_CSZ.File,
 //
 SortedReduz := SORT(joinedrecs,recid, csz_id)  : PERSIST ('~CLASS::Rik::PERSIST::Person_Reduz'); //sort por rec_id, csz_id
 
+OUTPUT(SortedReduz,,'~CLASS::Rik::OUT::Person_Reduz', OVERWRITE);
+
 output(SortedReduz, named ('Person_Reduz'));

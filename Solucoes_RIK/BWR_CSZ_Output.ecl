@@ -33,6 +33,8 @@ END;
 
 // faz a transformação propriamente dita, via Project, em arquivo de persistencia e exporta UID
 
-UID_City := PROJECT(DeDupCitys,CityTransf(LEFT,COUNTER)) : PERSIST ('~CLASS::Rik::OUT::LookupCSZ');
+UID_City := PROJECT(DeDupCitys,CityTransf(LEFT,COUNTER));
+
+OUTPUT(UID_City,,'~CLASS::Rik::OUT::File_CSZ', OVERWRITE);
 
 output(UID_City, named ('UID_City'));

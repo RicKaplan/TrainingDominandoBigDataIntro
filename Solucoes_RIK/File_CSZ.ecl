@@ -5,7 +5,7 @@ EXPORT File_CSZ := MODULE
             $.UID_Person.state;
             $.UID_Person.ZipCode;
 	END;
-	SHARED Filename := '~class::rik::out::lookupcsz__p3304988207';
+	SHARED Filename := '~class::rik::out::file_csz';
 	EXPORT File := DATASET(Filename,Layout,FLAT);
-//	EXPORT IDX_CSZ := INDEX(File,{CSZ_ID},{File},'~CLASS::Rik::KEY::Lookup_CSZ');
+	EXPORT IDX_CSZ := INDEX(File,{CSZ_ID},{File},'~CLASS::Rik::KEY::file_csz');
 END;
